@@ -1,0 +1,60 @@
+<div class="card border-dark mb-3">
+  <div class="card-header" *ngIf="!usuario">{{ titulo }}</div>
+  <div class="card-header" *ngIf="usuario">{{ titulo2 }}</div>
+  <div class="card-body">
+    <form #usuarioForm="ngForm">
+      
+      <h2 class="text-center">Añadir/Cambiar Tutor asignado para {{usuario.name}} {{usuario.surName}}</h2>
+
+      <div class="form-group row pb-2">
+        <label for="" class="col-form-label col-sm-3">TUTORES</label>
+        <div class="col-sm-9">
+            <select class="form-select" name="tutorReponsable" #type="ngModel" #tutorReponsable="ngModel" [(ngModel)]="usuario.tutorReponsable"
+            required="true">
+            <option [value]="tutor.id" *ngFor="let tutor of listaTutor">{{tutor.name}} {{tutor.surName}}</option>
+            </select>
+      
+          <div
+            class="alert alert-danger"
+            *ngIf="tutorReponsable.invalid && (tutorReponsable.dirty || tutorReponsable.touched)"
+          >
+            <div *ngIf="tutorReponsable.errors?.['required']">El tutor es necesario</div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <div class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+              <button
+                class="btn btn-primary"
+                role="button"
+                (click)="create()"
+                *ngIf="!usuario.id; else elseBlock"
+                [disabled]="!usuarioForm.form.valid"
+              >
+                Crear
+              </button>
+
+              <ng-template #elseBlock>
+                <button
+                  class="btn btn-primary"
+                  role="button"
+                  (click)="update()"
+                  [disabled]="!usuarioForm.form.valid"
+                >
+                  Editar
+                </button>
+              </ng-template>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

@@ -65,12 +65,12 @@ export class ListAlumnoComponent implements OnInit {
       {
         label: "Asignar Profesor",
         icon: "pi pi-user-edit",
-        //command: () =>   Cambiar Para asignar profesor
+        command: () => this.addProfesor(true)
       },
       {
         label: "Asignar Tutor",
         icon: "pi pi-book",
-        //command: () =>   Cambiar Para asignar profesor
+        command: () => this.addTutor(true)
       },
       {
         label: "Asignar Empresa",
@@ -87,6 +87,35 @@ export class ListAlumnoComponent implements OnInit {
         command: () => this.router.navigateByUrl('/users/unactive')
       }
     ]
+  }
+
+  addTutor(editar: boolean){
+    if (editar) {
+      if(this.selectedUser?.id != null) {
+
+        this.router.navigateByUrl('/users/addTutor/' + this.selectedUser?.id)
+      } else {
+
+        this.messageService.add({severity: 'warning', summary: "Advertencia", detail: 'Seleccione un registro'})
+        return;
+      }
+
+    }
+  }
+
+  addProfesor(editar: boolean){
+
+    if (editar) {
+      if(this.selectedUser?.id != null) {
+
+        this.router.navigateByUrl('/users/addProfesor/' + this.selectedUser?.id)
+      } else {
+
+        this.messageService.add({severity: 'warning', summary: "Advertencia", detail: 'Seleccione un registro'})
+        return;
+      }
+
+    }
   }
 
 

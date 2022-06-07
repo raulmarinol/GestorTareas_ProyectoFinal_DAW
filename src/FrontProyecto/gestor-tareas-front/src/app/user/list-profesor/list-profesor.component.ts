@@ -112,7 +112,6 @@ export class ListProfesorComponent implements OnInit {
       if (result.isConfirmed) {
           this.usuarioService.delete(usuario).subscribe(
             response => {
-              this.usuarios=this.usuarios.filter(usr=> usr !== usuario)
             }
           )
           Swal.fire(

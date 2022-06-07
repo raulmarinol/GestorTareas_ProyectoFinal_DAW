@@ -3,17 +3,19 @@ import { User } from '../user';
 import { UserService } from '../user.service';
 import { Router,ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
+
 @Component({
-  selector: 'app-formulario-users',
-  templateUrl: './formulario-users.component.html',
-  styleUrls: ['./formulario-users.component.css']
+  selector: 'app-addProfesor',
+  templateUrl: './addProfesor.component.html',
+  styleUrls: ['./addProfesor.component.css']
 })
-export class FormularioUsersComponent implements OnInit {
+export class AddProfesorComponent implements OnInit {
 
   usuario!: User;
+  listaProfesor: User[]=[];
 
-  titulo:string= "Crear Usuario"
-  titulo2:string= "Editar Usuario"
+  titulo:string= "Cambiar profesor asignado"
+  titulo2:string= "Cambiar profesor asignado"
 
   errores:string[]=[];
 
@@ -25,6 +27,7 @@ export class FormularioUsersComponent implements OnInit {
   ngOnInit(): void {
     this.cargarUsuario()
     this.usuario=new User();
+    this.cargarListaProfesores();
   }
 
   cargarUsuario(): void{
@@ -34,10 +37,22 @@ export class FormularioUsersComponent implements OnInit {
         this.usuarioService.getUser(id).subscribe({
           next: usuario => {
             this.usuario=usuario
+            console.log(usuario);
+            
        }
       })
       }
     })
+  }
+
+  cargarListaProfesores(){
+    this.usuarioService.getUsersbyRol("PROFESOR").subscribe({
+      next:(listaProfesor)=>{
+        this.listaProfesor=listaProfesor;
+        console.log(listaProfesor);
+        
+      }
+    });
   }
 
   create(): void{
@@ -57,10 +72,11 @@ export class FormularioUsersComponent implements OnInit {
 
   update(): void{
 
+
     this.usuarioService.update(this.usuario).subscribe({
       next: usuario=>{
 
-        this.router.navigate(['/users'])
+        this.router.navigate(['/users/listaAlumnos'])
         Swal.fire('Usuario Actualizado', `Usuario ${this.usuario.name} ${this.usuario.surName}  actualizado con éxtio!`, 'success')
       },
       error: err =>{

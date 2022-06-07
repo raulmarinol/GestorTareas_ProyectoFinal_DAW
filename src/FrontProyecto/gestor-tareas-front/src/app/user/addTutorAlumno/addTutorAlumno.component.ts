@@ -3,17 +3,19 @@ import { User } from '../user';
 import { UserService } from '../user.service';
 import { Router,ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
+
 @Component({
-  selector: 'app-formulario-users',
-  templateUrl: './formulario-users.component.html',
-  styleUrls: ['./formulario-users.component.css']
+  selector: 'app-addTutorAlumno',
+  templateUrl: './addTutorAlumno.component.html',
+  styleUrls: ['./addTutorAlumno.component.css']
 })
-export class FormularioUsersComponent implements OnInit {
+export class AddTutorAlumnoComponent implements OnInit {
 
   usuario!: User;
+  listaTutor: User[]=[];
 
-  titulo:string= "Crear Usuario"
-  titulo2:string= "Editar Usuario"
+  titulo:string= "Cambiar Tutor asignado"
+  titulo2:string= "Cambiar Tutor asignado"
 
   errores:string[]=[];
 
@@ -25,6 +27,7 @@ export class FormularioUsersComponent implements OnInit {
   ngOnInit(): void {
     this.cargarUsuario()
     this.usuario=new User();
+    this.cargarListaTutores();
   }
 
   cargarUsuario(): void{
@@ -34,10 +37,22 @@ export class FormularioUsersComponent implements OnInit {
         this.usuarioService.getUser(id).subscribe({
           next: usuario => {
             this.usuario=usuario
+            console.log(usuario);
+            
        }
       })
       }
     })
+  }
+
+  cargarListaTutores(){
+    this.usuarioService.getUsersbyRol("TUTOR").subscribe({
+      next:(listaTutor)=>{
+        this.listaTutor=listaTutor;
+        console.log(listaTutor);
+        
+      }
+    });
   }
 
   create(): void{
@@ -60,7 +75,7 @@ export class FormularioUsersComponent implements OnInit {
     this.usuarioService.update(this.usuario).subscribe({
       next: usuario=>{
 
-        this.router.navigate(['/users'])
+        this.router.navigate(['/users/listaAlumnos'])
         Swal.fire('Usuario Actualizado', `Usuario ${this.usuario.name} ${this.usuario.surName}  actualizado con éxtio!`, 'success')
       },
       error: err =>{
@@ -74,13 +89,7 @@ export class FormularioUsersComponent implements OnInit {
     )
   }
 
-  compararContrasenia(): boolean{
-    if (this.usuario.password==this.usuario.password2){
-      return true;
-    }else{
-      return false;
-    }
-  }
+  
 
 
 }

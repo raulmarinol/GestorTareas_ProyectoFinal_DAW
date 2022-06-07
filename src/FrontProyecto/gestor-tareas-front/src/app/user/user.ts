@@ -10,8 +10,8 @@ export class User {
   active:boolean;
   updateUser!:Date;
   foto!:string;
-  profesor!:number;
-  tutor!:number;
+  tutorReponsable!:number;
+  profesorReponsable!:number;
 
   constructor(){
     this.active=true;

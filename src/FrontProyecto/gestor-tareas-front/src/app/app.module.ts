@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ListTutorComponent } from './user/list-tutor/list-tutor.component'
 import { ListAlumnoComponent } from './user/list-alumno/list-alumno.component'
 import { ListProfesorComponent } from './user/list-profesor/list-profesor.component'
+import { AddProfesorComponent} from './user/addProfesor/addProfesor.component'
+import { AddTutorAlumnoComponent } from './user/addTutorAlumno/addTutorAlumno.component'
 import { GestionarLitaAlumnoProfesorComponent } from './user/gestionar-lita-alumno-profesor/gestionar-lita-alumno-profesor.component'
 import { GestionarListAlumnoTutorComponent} from './user/gestionar-list-alumno-tutor/gestionar-list-alumno-tutor.component'
 import { LoginComponent } from './login/login.component';
@@ -55,6 +57,8 @@ const routes: Routes = [
   {path:'empresas', component:EmpresasComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/form/:id', component:FormularioUsersComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/unactive', component:UnactiveusersComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
+  {path:'users/addProfesor/:id', component:AddProfesorComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
+  {path:'users/addTutor/:id', component:AddTutorAlumnoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/profesor', component:GestionarLitaAlumnoProfesorComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'PROFESOR'}},
   {path:'users/tutor', component:GestionarListAlumnoTutorComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'TUTOR'}},
   {path:'perfil', component: PerfilComponent, canActivate: [AuthGuard]},
@@ -79,7 +83,9 @@ const routes: Routes = [
     ListAlumnoComponent,
     ListProfesorComponent,
     GestionarLitaAlumnoProfesorComponent,
-    GestionarListAlumnoTutorComponent
+    GestionarListAlumnoTutorComponent,
+    AddProfesorComponent,
+    AddTutorAlumnoComponent
    ],
   imports: [
     BrowserModule,

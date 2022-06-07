@@ -194,6 +194,8 @@ public class UserController {
 			userActual.setEmail(user.getEmail());
 			userActual.setPassword(new BCryptPasswordEncoder(15).encode(user.getPassword()));
 			userActual.setPhone(user.getPhone());
+			userActual.setProfesorReponsable(user.getProfesorReponsable());
+			userActual.setTutorReponsable(user.getTutorReponsable());
 
 			userService.updateUser(userActual);
 
