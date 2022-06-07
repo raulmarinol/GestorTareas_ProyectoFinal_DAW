@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg" *ngIf="user">
+  <div class="container-fluid">
+
+    <div class="d-flex justify-content-between">
+      <img
+      class="logo"
+      src="./assets/img/logo.png"
+      width="10%"
+      height="5%"
+      href="#"
+    />
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#"
+              ><i class="pi pi-home"></i> Home</a
+            >
+          </li>
+          <li class="nav-item" *ngIf="loggedRole === 'ADMIN'">
+            <a class="nav-link" href="/users"
+              ><i class="pi pi-users"></i> Lista de Usuarios</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="logout()"
+              ><i class="pi pi-ban"></i> Cerrar Sesión</a
+            >
+          </li>
+          <li class="nav-item" *ngIf="logueado()">
+            <a class="nav-link" onclick="history.back()"
+              ><i class="pi pi-fast-backward"></i> Atras</a
+            >
+          </li>
+          <li class="nav-item" *ngIf="logueado()">
+            <a class="nav-link" href="/perfil"
+              ><i class="pi pi-user"></i> Perfil</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
