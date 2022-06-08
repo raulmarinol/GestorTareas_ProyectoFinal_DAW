@@ -134,9 +134,11 @@ public class EmpresaController {
 	@DeleteMapping("/empresas/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		Map<String,Object> response = new HashMap<>();
+		Empresa empresa =null;
+		empresa = empresaService.findById(id);
 		
 		try {
-			empresaService.delete(id);
+			empresaService.delete(empresa);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al eliminar en la base de datos");
 			response.put("error", e.getMessage().concat(": ".concat(e.getMostSpecificCause().getMessage())));

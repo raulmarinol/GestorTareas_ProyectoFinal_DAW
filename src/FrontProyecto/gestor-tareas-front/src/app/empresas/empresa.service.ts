@@ -61,8 +61,8 @@ create(empresa: Empresa): Observable<Empresa>{
       );
   }
 
-  delete(empresa: Empresa): Observable<Empresa>{
-    return this.http.delete<Empresa>(`${this.urlEndPoint}/${empresa.id}`, {headers: this.httpHeaders}).pipe(
+  delete(id: number): Observable<Empresa>{
+    return this.http.delete<Empresa>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders}).pipe(
       catchError(e=>{
         this.router.navigate(['/empresas']);
         console.error(e.error.mensaje);
@@ -71,5 +71,6 @@ create(empresa: Empresa): Observable<Empresa>{
       })
       );
   }
+  
 
 }

@@ -35,8 +35,8 @@ public class EmpresaServiceImpl implements EmpresaService{
 	}
 
 	@Override
-	public void delete(Long id) {
-		empresaRepo.deleteById(id);
+	public void delete(Empresa empresa) {
+		empresaRepo.delete(empresa);
 		
 	}
 

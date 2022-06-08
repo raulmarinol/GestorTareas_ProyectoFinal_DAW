@@ -38,8 +38,8 @@ public class TareaServiceImpl implements TareaService{
 
 	@Override
 	@Transactional
-	public void delete(Long id) {
-		tareaRepo.deleteById(id);
+	public void delete(Tarea tarea) {
+		tareaRepo.delete(tarea);
 		
 	}
 

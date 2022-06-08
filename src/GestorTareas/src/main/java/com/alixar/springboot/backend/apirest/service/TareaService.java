@@ -9,6 +9,6 @@ public interface TareaService {
 	public List<Tarea> findAll();	
 	public Tarea findById(Long id);	
 	public Tarea save(Tarea tarea);	
-	public void delete(Long id);
+	public void delete(Tarea tarea);
 
 }

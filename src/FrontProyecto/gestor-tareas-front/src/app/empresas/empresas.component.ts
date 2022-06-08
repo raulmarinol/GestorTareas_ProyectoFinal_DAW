@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Empresa } from './empresa';
 import { EmpresaService } from './empresa.service';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
 import { MessageService, MenuItem } from 'primeng/api';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-empresas',
@@ -33,7 +33,6 @@ export class EmpresasComponent implements OnInit {
       {field: "telefono", header: "Teléfono"},
 
     ]
-    let table=
 
     this.items = [
       {
@@ -49,7 +48,7 @@ export class EmpresasComponent implements OnInit {
       {
         label: "Borrar",
         icon: "pi pi-trash",
-        command: () => this.crearEditarEmpresa(true)
+        command: () => this.eliminarEmpresa()
       },
       {
         label: "Ver Alumnos Asignados",
@@ -60,7 +59,11 @@ export class EmpresasComponent implements OnInit {
     ]
 
   }
-
+/**
+ * Método para  crear/editar las empresas
+ * @param editar es boolean para saber si esta la id o no
+ * @returns
+ */
   crearEditarEmpresa(editar: boolean) {
 
     if (editar) {
@@ -79,30 +82,37 @@ export class EmpresasComponent implements OnInit {
     }
   }
 
+  eliminarEmpresa() {
+    this.delete(this.selectedEmpresa!);
+  }
+  delete(empresa: Empresa): void {
+    Swal.fire({
+      title: '¿Estas seguro de que quieres borrar esta empresa?',
+      text: "Este cambio es irreversible!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si!'
+    }).then((result) => {
+      if (result.isConfirmed) {
 
-delete(empresa: Empresa): void {
-  Swal.fire({
-    title: '¿Estas seguro?',
-    text: "Borraras a esta empresa!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Si!'
-  }).then((result) => {
-    if (result.isConfirmed) {
-        this.empresaService.delete(empresa).subscribe({
-          next: response => {
-            this.selectedEmpresa = response;
-          }
-        })
-        Swal.fire(
-          'Empresa Borrado',
+          this.empresaService.delete(empresa.id).subscribe(
+            response => {
+              this.empresa=this.empresa.filter(response=> response !== empresa)
+            }
+          )
+          Swal.fire(
+            'Empresa borrada',
+          )
+      }
+    })
+  }
 
-        )
-        window.location.reload()
-    }
-  })
-}
+
+
+
+
+
 
 }
