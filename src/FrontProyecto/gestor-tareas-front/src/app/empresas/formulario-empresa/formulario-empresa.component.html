@@ -1,0 +1,114 @@
+<div class="card border-dark mb-3">
+  <div class="card-header" *ngIf="!empresa">{{ titulo }}</div>
+  <div class="card-header" *ngIf="empresa">{{ titulo2 }}</div>
+  <div class="card-body">
+    <form #empresaForm="ngForm">
+      <div class="form-group row pb-2">
+        <label for="" class="col-form-label col-sm-3">Nombre</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="empresa.nombre"
+            name="nick"
+            #nombre="ngModel"
+            required="true"
+            minlength="4"
+          />
+          <div
+            class="alert alert-danger"
+            *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)"
+          >
+            <div *ngIf="nombre.errors?.['required']">El nombre es requerido</div>
+            <div *ngIf="nombre.errors?.['minlength']">
+              El nombre debe ser mayor a 3 letras
+            </div>
+            <br />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row pb-2">
+        <label for="" class="col-form-label col-sm-3">Direccion</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="empresa.dirrecion"
+            name="direccion"
+            #direccion="ngModel"
+            required="true"
+            minlength="4"
+          />
+          <div
+            class="alert alert-danger"
+            *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)"
+          >
+            <div *ngIf="direccion.errors?.['required']">
+              La dirección es obligatorio
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row pb-2 pb-2">
+        <label for="" class="col-form-label col-sm-3">Teléfono</label>
+        <div class="col-sm-9">
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="empresa.telefono"
+            name="telefono"
+            #telefono="ngModel"
+            required="true"
+            minlength="9"
+            telefono
+          />
+
+          <div
+            class="alert alert-danger"
+            *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)"
+          >
+            <div *ngIf="telefono.errors?.['required']">El email es requerido</div>
+            <div *ngIf="telefono.errors?.['telefono']">
+              Introduce una dirección de correo eléctronico correcta
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <div class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+              <button
+                class="btn btn-primary"
+                role="button"
+                (click)="create()"
+                *ngIf="!empresa.id; else elseBlock"
+                [disabled]="!empresaForm.form.valid"
+              >
+                Crear
+              </button>
+
+              <ng-template #elseBlock>
+                <button
+                  class="btn btn-primary"
+                  role="button"
+                  (click)="update()"
+                  [disabled]="!empresaForm.form.valid"
+                >
+                  Editar
+                </button>
+              </ng-template>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

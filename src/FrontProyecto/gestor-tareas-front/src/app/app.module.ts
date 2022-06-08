@@ -5,7 +5,9 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
 import { UserService} from './user/user.service';
+import { EmpresaService} from './empresas/empresa.service'
 import { FormularioUsersComponent } from './user/formulario-users/formulario-users.component';
+import { FormularioEmpresaComponent } from './empresas/formulario-empresa/formulario-empresa.component';
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ListTutorComponent } from './user/list-tutor/list-tutor.component'
@@ -50,10 +52,12 @@ const routes: Routes = [
   {path:'', redirectTo:'/home', pathMatch:'full'},
   {path:'login', component: LoginComponent},
   {path:'users', component:UserComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
+  {path:'empresas', component:EmpresasComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/listaTutor', component:ListTutorComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/listaAlumnos', component:ListAlumnoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/listaProfesores', component:ListProfesorComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/form', component:FormularioUsersComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
+  {path:'empresas/form', component:FormularioEmpresaComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'empresas', component:EmpresasComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/form/:id', component:FormularioUsersComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/unactive', component:UnactiveusersComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
@@ -85,7 +89,8 @@ const routes: Routes = [
     GestionarLitaAlumnoProfesorComponent,
     GestionarListAlumnoTutorComponent,
     AddProfesorComponent,
-    AddTutorAlumnoComponent
+    AddTutorAlumnoComponent,
+    FormularioEmpresaComponent
    ],
   imports: [
     BrowserModule,
@@ -105,7 +110,7 @@ const routes: Routes = [
     KnobModule,
     NgbModule
   ],
-  providers: [UserService, MessageService],
+  providers: [UserService, MessageService,EmpresaService],
   bootstrap: [AppComponent]
 })
 

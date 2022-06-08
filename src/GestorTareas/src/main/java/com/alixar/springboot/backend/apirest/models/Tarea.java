@@ -6,10 +6,14 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="tareas")
@@ -28,6 +32,10 @@ public class Tarea  implements Serializable{
 	
 	@Column(name = "tareaDesarrollada", nullable = false, length = 200)
     private String tareaDesarrollada;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private User user;
 
 	public Tarea() {
 		super();
@@ -65,7 +73,14 @@ public class Tarea  implements Serializable{
 	public void setTareaDesarrollada(String tareaDesarrollada) {
 		this.tareaDesarrollada = tareaDesarrollada;
 	}	
-	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -73,7 +88,7 @@ public class Tarea  implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, registDate, tareaDesarrollada, tiempoTarea);
+		return Objects.hash(id, registDate, tareaDesarrollada, tiempoTarea, user);
 	}
 
 	@Override
@@ -87,13 +102,13 @@ public class Tarea  implements Serializable{
 		Tarea other = (Tarea) obj;
 		return Objects.equals(id, other.id) && Objects.equals(registDate, other.registDate)
 				&& Objects.equals(tareaDesarrollada, other.tareaDesarrollada)
-				&& Objects.equals(tiempoTarea, other.tiempoTarea);
+				&& Objects.equals(tiempoTarea, other.tiempoTarea) && Objects.equals(user, other.user);
 	}
 
 	@Override
 	public String toString() {
 		return "Tarea [id=" + id + ", registDate=" + registDate + ", tiempoTarea=" + tiempoTarea
-				+ ", tareaDesarrollada=" + tareaDesarrollada + "]";
+				+ ", tareaDesarrollada=" + tareaDesarrollada + ", user=" + user + "]";
 	}
 
 	

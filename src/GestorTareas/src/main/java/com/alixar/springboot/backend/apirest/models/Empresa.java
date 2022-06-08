@@ -1,14 +1,21 @@
 package com.alixar.springboot.backend.apirest.models;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="empresas")
@@ -27,6 +34,10 @@ public class Empresa  implements Serializable{
 	
 	@Column(name="telefono",unique=true, nullable=false)
 	private Integer telefono;
+	
+	@OneToMany(mappedBy="empresa", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnoreProperties
+	private Set<User> user = new HashSet<>();
 	
 	
 

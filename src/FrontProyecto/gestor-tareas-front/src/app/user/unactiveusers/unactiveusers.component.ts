@@ -32,13 +32,11 @@ export class UnactiveusersComponent implements OnInit {
     });
 
     this.cols = [
-      {field: "das", header: "DAS"},
       {field: "name", header: "Nombre"},
       {field: "surName", header: "Apellido"},
-      {field: "projectGroup", header: "Grupo"},
+      {field: "phone", header: "Teléfono"},
       {field: "email", header: "email"},
-      {field: "trainingCenter", header: "Centro"},
-      {field: "createAt", header: "Fecha de alta"},
+      {field: "rol", header: "Rol"},
 
     ]
 

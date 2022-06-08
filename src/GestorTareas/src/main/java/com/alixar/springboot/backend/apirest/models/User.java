@@ -1,18 +1,25 @@
 package com.alixar.springboot.backend.apirest.models;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -56,6 +63,14 @@ public class User implements Serializable {
 
 	@Column
 	private Long tutorReponsable;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private Empresa empresa;
+	
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnoreProperties
+	private Set<Tarea> tarea = new HashSet<>();
 	
 
 	public User() {
@@ -166,6 +181,24 @@ public class User implements Serializable {
 		this.tutorReponsable = tutorReponsable;
 	}
 	
+	
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+	
+
+	public Set<Tarea> getTarea() {
+		return tarea;
+	}
+
+	public void setTarea(Set<Tarea> tarea) {
+		this.tarea = tarea;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

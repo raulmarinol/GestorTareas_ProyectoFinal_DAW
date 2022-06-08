@@ -17,8 +17,6 @@ export class FormularioUsersComponent implements OnInit {
 
   errores:string[]=[];
 
-  contrasena!: string;
-
 
   constructor(private usuarioService: UserService, private router:Router, private activatedRoute: ActivatedRoute) { }
 
@@ -67,19 +65,9 @@ export class FormularioUsersComponent implements OnInit {
         this.errores=err.error.errors as string[];
         console.error(err.error.errors)
       }
-
-
     }
 
     )
-  }
-
-  compararContrasenia(): boolean{
-    if (this.usuario.password==this.usuario.password2){
-      return true;
-    }else{
-      return false;
-    }
   }
 
 

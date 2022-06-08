@@ -29,6 +29,8 @@ public class EmpresaServiceImpl implements EmpresaService{
 
 	@Override
 	public Empresa save(Empresa empresa) {
+		
+		if(empresa!=null && empresa.getId()==null) return null;
 		return empresaRepo.save(empresa);
 	}
 
