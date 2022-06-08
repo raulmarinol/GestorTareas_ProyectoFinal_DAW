@@ -13,6 +13,7 @@ export class EmpresaService {
 
   private urlEndPoint:string = 'http://localhost:8080/empresas';
   private httpHeaders=new HttpHeaders().set('Authorization', `Bearer ${sessionStorage.getItem('token')}` || '');
+  private header=new HttpHeaders().set('Authorization', `Bearer ${sessionStorage.getItem('token')}` || '');
 
 constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
 
@@ -37,7 +38,7 @@ create(empresa: Empresa): Observable<Empresa>{
   }
 
   getEmpresa(id: number): Observable<Empresa>{
-    return this.http.get<Empresa>(`${this.urlEndPoint}/${id}`).pipe(
+    return this.http.get<Empresa>(`${this.urlEndPoint}/${id}`,{headers:this.header}).pipe(
     catchError(e=>{
       this.router.navigate(['/empresas']);
       console.error(e.error.mensaje);
@@ -71,6 +72,6 @@ create(empresa: Empresa): Observable<Empresa>{
       })
       );
   }
-  
+
 
 }

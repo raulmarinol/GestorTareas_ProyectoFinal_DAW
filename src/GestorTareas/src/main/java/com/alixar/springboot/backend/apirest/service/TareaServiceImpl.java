@@ -18,21 +18,21 @@ public class TareaServiceImpl implements TareaService{
 	@Override
 	@Transactional(readOnly=true)
 	public List<Tarea> findAll() {
-		// TODO Auto-generated method stub
+		
 		return (List<Tarea>) tareaRepo.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly=true)
 	public Tarea findById(Long id) {
-		// TODO Auto-generated method stub
+		
 		return tareaRepo.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional
 	public Tarea save(Tarea tarea) {
-		// TODO Auto-generated method stub
+		
 		return tareaRepo.save(tarea);
 	}
 

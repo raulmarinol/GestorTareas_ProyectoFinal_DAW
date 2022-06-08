@@ -115,9 +115,8 @@ public class EmpresaController {
 		try {
 			empresaActual.setNombre(empresa.getNombre());
 			empresaActual.setDirrecion(empresa.getDirrecion());
-			empresaActual.setTelefono(empresa.getTelefono());			
-		
-		empresaUpdate = empresaService.save(empresaActual);
+			empresaActual.setTelefono(empresa.getTelefono());
+			empresaUpdate = empresaService.save(empresaActual);
 		
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al actualizar en la base de datos");

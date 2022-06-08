@@ -82,9 +82,20 @@ export class EmpresasComponent implements OnInit {
     }
   }
 
+ /**
+ * Método para borrar una empresa que llama al metodo delete
+ * @param
+ * @returns
+ */
   eliminarEmpresa() {
     this.delete(this.selectedEmpresa!);
   }
+
+   /**
+ * Método para borrar una empresa
+ * @param empresa
+ * @returns
+ */
   delete(empresa: Empresa): void {
     Swal.fire({
       title: '¿Estas seguro de que quieres borrar esta empresa?',
