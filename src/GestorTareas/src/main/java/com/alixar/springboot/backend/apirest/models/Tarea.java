@@ -30,7 +30,7 @@ public class Tarea  implements Serializable{
 	@Column(name = "REGIST_Time", nullable = false)
     private Double tiempoTarea;
 	
-	@Column(name = "tareaDesarrollada", nullable = false, length = 200)
+	@Column(name = "tareaDesarrollada", nullable = false, length = 250)
     private String tareaDesarrollada;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

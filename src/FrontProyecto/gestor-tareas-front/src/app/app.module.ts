@@ -42,6 +42,8 @@ import {PanelModule} from 'primeng/panel';
 import {MenubarModule} from 'primeng/menubar';
 import {DialogModule} from 'primeng/dialog';
 import { MessageService } from 'primeng/api';
+import {SliderModule} from 'primeng/slider';
+import {InputTextModule} from 'primeng/inputtext';
 
 import {FileUploadModule} from 'primeng/fileupload';
 import {PasswordModule} from 'primeng/password';
@@ -115,7 +117,9 @@ const routes: Routes = [
     PasswordModule,
     ReactiveFormsModule,
     KnobModule,
-    NgbModule
+    NgbModule,
+    SliderModule,
+    InputTextModule
   ],
   providers: [UserService, MessageService,EmpresaService,TareaService],
   bootstrap: [AppComponent]

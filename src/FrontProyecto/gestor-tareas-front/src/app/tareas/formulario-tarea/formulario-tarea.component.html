@@ -5,7 +5,7 @@
     <form #tareaForm="ngForm">
       <div class="form-group row pb-2">
         <label for="" class="col-form-label col-sm-3">Fecha</label>
-        <div class="col-sm-9">
+        <div class="col-sm-9 row justify-item-center">
           <input
             type="date"
             class="form-control"
@@ -27,24 +27,15 @@
 
       <div class="form-group row pb-2">
         <label for="" class="col-form-label col-sm-3">Duración de la Tarea</label>
-        <div class="col-sm-9">
-          <input
-            type="number"
-            class="form-control"
-            [(ngModel)]="tarea.tiempoTarea"
-            name="tiempo"
-            #tiempo="ngModel"
-            required="true"
-          />
-          <div
-            class="alert alert-danger"
-            *ngIf="tiempo.invalid && (tiempo.dirty || tiempo.touched)"
-          >
-            <div *ngIf="tiempo.errors?.['required']">
-              El tiempo es obligatorio
-            </div>
+        <div class="col-sm-9 d-flex justify-items-center">
+          <p-knob type="number"
+          class="form-control"
+          [(ngModel)]="tarea.tiempoTarea"
+          name="tiempo"
+          #tiempo="ngModel"
+          required="true" [min]="0" [max]="10" [step]="0.5"></p-knob>
           </div>
-        </div>
+
       </div>
 
       <div class="form-group row pb-2 pb-2">
@@ -64,8 +55,8 @@
             class="alert alert-danger"
             *ngIf="tareaDesarrollada.invalid && (tareaDesarrollada.dirty || tareaDesarrollada.touched)"
           >
-            <div *ngIf="tareaDesarrollada.errors?.['required']">El email es requerido</div>
-            
+            <div *ngIf="tareaDesarrollada.errors?.['required']">La Tarea es requerida</div>
+
           </div>
         </div>
       </div>

@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 export class FormularioTareaComponent implements OnInit {
 
   tarea!: Tarea;
+  val!: number;
 
   titulo:string= "Editar Tarea"
   titulo2:string= "Crear Tarea"
