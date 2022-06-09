@@ -32,7 +32,12 @@
               ><i class="pi pi-users"></i> Lista de Usuarios</a
             >
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="loggedRole === 'ADMIN'">
+            <a class="nav-link" href="/tareas"
+              ><i class="pi pi-book"></i> Lista de Tareas</a
+            >
+          </li>
+          <li class="nav-item" *ngIf="logueado()">
             <a class="nav-link" (click)="logout()"
               ><i class="pi pi-ban"></i> Cerrar Sesión</a
             >

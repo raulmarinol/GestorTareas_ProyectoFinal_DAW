@@ -29,7 +29,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().cors().and().authorizeHttpRequests().antMatchers(HttpMethod.POST, "/login").permitAll()
 				.antMatchers("/users/**").hasAnyRole("ADMIN", "ALUMNO", "PROFESOR","TUTOR").antMatchers("/empresas/**")
-				.hasAnyRole("ADMIN", "TUTOR").and().userDetailsService(usuarioService).exceptionHandling()
+				.hasAnyRole("ADMIN", "TUTOR").antMatchers("/tareas/**").hasAnyRole("ADMIN", "ALUMNO", "PROFESOR","TUTOR").and().userDetailsService(usuarioService).exceptionHandling()
 				.authenticationEntryPoint((request, response, authException) -> response
 						.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized"))
 				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

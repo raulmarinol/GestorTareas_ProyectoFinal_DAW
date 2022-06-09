@@ -27,8 +27,9 @@ import { EmpresaService} from './empresas/empresa.service'
 import { EmpresasComponent } from './empresas/empresas.component';
 import { FormularioEmpresaComponent } from './empresas/formulario-empresa/formulario-empresa.component';
 
-
+import { TareaService } from './tareas/tarea.service'
 import { TareasComponent } from './tareas/tareas.component';
+import { FormularioTareaComponent} from './tareas/formulario-tarea/formulario-tarea.component'
 
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
@@ -54,6 +55,9 @@ const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path:'users', component:UserComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'empresas', component:EmpresasComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
+  {path:'tareas', component:TareasComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
+  {path:'tareas/form', component:FormularioTareaComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
+  {path:'tareas/form/:id', component:FormularioTareaComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/listaTutor', component:ListTutorComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/listaAlumnos', component:ListAlumnoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/listaProfesores', component:ListProfesorComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
@@ -92,7 +96,8 @@ const routes: Routes = [
     GestionarListAlumnoTutorComponent,
     AddProfesorComponent,
     AddTutorAlumnoComponent,
-    FormularioEmpresaComponent
+    FormularioEmpresaComponent,
+    FormularioTareaComponent
    ],
   imports: [
     BrowserModule,
@@ -112,7 +117,7 @@ const routes: Routes = [
     KnobModule,
     NgbModule
   ],
-  providers: [UserService, MessageService,EmpresaService],
+  providers: [UserService, MessageService,EmpresaService,TareaService],
   bootstrap: [AppComponent]
 })
 
