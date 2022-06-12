@@ -3,7 +3,8 @@
     <div style="margin-bottom: 20px">
 
       <p-menubar [model]="items">
-
+      
+        <button type="button" pButton pRipple icon="pi pi-file-o" (click)="todoTable.exportCSV()" class="p-mr-2" pTooltip="Exportar CSV" tooltipPosition="bottom"></button>
 
       </p-menubar>
     </div>
@@ -36,19 +37,17 @@
               <p-columnFilter
                 type="text"
                 field="registdate"
-                placeholder="registdate"
+                placeholder="Buscar por Fecha"
               ></p-columnFilter>
             </th>
             <th>
               <p-columnFilter
                 type="text"
                 field="registtime"
-                placeholder="registtime"
+                placeholder="Buscar por Horas"
               ></p-columnFilter>
             </th>
-            <th>
-              <button type="button" pButton pRipple icon="pi pi-file-o" (click)="todoTable.exportCSV()" class="p-mr-2" pTooltip="Exportar CSV" tooltipPosition="bottom"></button>
-            </th>
+            
             <th>
               <div class="p-d-flex p-jc-between p-ai-center">
                 Fecha

@@ -64,7 +64,7 @@ const routes: Routes = [
   {path:'tareas', component:TareasComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'tareas/form', component:FormularioTareaComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ALUMNO'}},
   {path:'tareas/form/:id', component:FormularioTareaComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ALUMNO'}},
-  {path:'tareas/user/:id', component:TareaUsuarioComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ALUMNO'}},
+  {path:'tareas/user/:id', component:TareaUsuarioComponent, canActivate: [AuthGuard]},
   {path:'tareas/users', component:ListaTareaUsuarioComponent, canActivate: [AuthGuard]},
   {path:'users/listaTutor', component:ListTutorComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/listaAlumnos', component:ListAlumnoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},

@@ -1,10 +1,11 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Component, OnInit } from '@angular/core';
 import { Tarea } from '../tarea';
 import { TareaService } from '../tarea.service';
 import Swal from 'sweetalert2';
 import { MessageService, MenuItem } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 @Component({
   selector: 'app-lista-tarea-usuario',

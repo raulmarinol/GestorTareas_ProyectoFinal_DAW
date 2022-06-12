@@ -50,7 +50,7 @@ export class GestionarListAlumnoTutorComponent implements OnInit {
       {
         label: "Ver Tareas",
         icon: "pi pi-book",
-        //command: () =>   Cambiar que te lleve a ver las tareas del alumno
+        command: () =>   this.getUserTareas()
       },
 
 
@@ -115,6 +115,19 @@ export class GestionarListAlumnoTutorComponent implements OnInit {
           )
       }
     })
+  }
+
+  getUserTareas() {
+
+    if(this.selectedUser?.id != null) {
+
+      this.router.navigateByUrl('tareas/user/' + this.selectedUser?.id)
+    } else {
+
+      this.messageService.add({severity: 'warning', summary: "Advertencia", detail: 'Seleccione un registro'})
+      return;
+    }
+    
   }
 
 }

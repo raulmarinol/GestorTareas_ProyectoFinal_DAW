@@ -119,7 +119,9 @@ export class EmpresasComponent implements OnInit {
       }
     })
   }
-
+/**
+ * Metodo para ver los alumnos que están asignagos a cada empresa
+ */
   getUserEmpresa() {
 
     if(this.selectedEmpresa?.id != null) {

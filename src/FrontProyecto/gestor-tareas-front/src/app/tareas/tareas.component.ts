@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild  } from '@angular/core';
 import { Tarea } from './tarea';
 import { TareaService } from './tarea.service';
 import Swal from 'sweetalert2';
@@ -35,8 +35,6 @@ export class TareasComponent implements OnInit {
       {field: "tareaDesarrollada", header: "Descripcción"},
 
     ]
-
-
 
     this.items = [
       {

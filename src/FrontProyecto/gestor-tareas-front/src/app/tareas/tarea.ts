@@ -1,6 +1,6 @@
 export class Tarea {
   id!:number;
-  registDate!:Date;
+  registDate!: string | Date;
   tiempoTarea!:number;
   tareaDesarrollada!:string;
 }
