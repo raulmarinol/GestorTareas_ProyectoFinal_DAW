@@ -3,13 +3,15 @@ package com.alixar.springboot.backend.apirest.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.alixar.springboot.backend.apirest.models.Tarea;
-import com.alixar.springboot.backend.apirest.models.User;
 
 @Repository
 public interface TareaRepository extends JpaRepository<Tarea,Long>{
-	public List<Tarea> findTareaByUser(User user);
+	@Query(value="SELECT * from tareas t WHERE t.user_id =?1",nativeQuery = true)
+	public List<Tarea> findTareaByUser(Long id);
+	
 
 }

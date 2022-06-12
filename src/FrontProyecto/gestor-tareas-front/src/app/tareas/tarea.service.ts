@@ -36,6 +36,13 @@ create(tarea: Tarea): Observable<Tarea>{
     );
 }
 
+getTareaByUser(id:number): Observable<Tarea[]>{
+
+  let path = this.urlEndPoint + "/user/" + id;
+
+    return this.http.get<Tarea[]>(path,{headers:this.header});
+}
+
 getTarea(id: number): Observable<Tarea>{
   return this.http.get<Tarea>(`${this.urlEndPoint}/${id}`,{headers:this.header}).pipe(
   catchError(e=>{

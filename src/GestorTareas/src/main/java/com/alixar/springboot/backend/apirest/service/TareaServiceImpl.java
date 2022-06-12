@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alixar.springboot.backend.apirest.models.Tarea;
-import com.alixar.springboot.backend.apirest.models.User;
 import com.alixar.springboot.backend.apirest.repository.TareaRepository;
 
 @Service
@@ -47,14 +46,13 @@ public class TareaServiceImpl implements TareaService{
 	}
 
 	@Override
-	public List<Tarea> findTareaByUser(User user) {
-		return tareaRepo.findTareaByUser(user);
+	public Tarea insertTarea(Tarea tarea) {
+		return tareaRepo.save(tarea);
 	}
 
 	@Override
-	public Tarea insertTarea(Tarea tarea) {
-		// TODO Auto-generated method stub
-		return tareaRepo.save(tarea);
+	public List<Tarea> findTareaByUser(Long id) {
+		return tareaRepo.findTareaByUser(id);
 	}
 
 }

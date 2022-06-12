@@ -173,6 +173,15 @@ public class TareaController {
 		response.put("mensaje", "La Tarea ha con exito");
 		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
 	}
+	
+@GetMapping("/tareas/user/{id}")
+	
+	public List<Tarea> usersTareas(@PathVariable Long id) {
+		
+		if ( id == null) return null;
+
+		return tareaService.findTareaByUser(id);
+	}
 
 }
 

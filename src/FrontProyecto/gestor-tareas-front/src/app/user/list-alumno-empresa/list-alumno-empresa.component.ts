@@ -16,8 +16,6 @@ export class ListAlumnoEmpresaComponent implements OnInit {
 
   usuarios: User[]=[];
   cols: any[] = [];
-  items: MenuItem[] =[];
-  items2: MenuItem[] =[];
 
   selectedUser?: User;
 
@@ -43,7 +41,6 @@ export class ListAlumnoEmpresaComponent implements OnInit {
   cargarUsuarios(): void{
     this.activatedRoute.params.subscribe(params=>{
       let id= params['id']
-      console.log(id+" esta es id");
       if (id){
         this.usuarioService.getUserByEmpresaID(id).subscribe({
           next: usuarios => {

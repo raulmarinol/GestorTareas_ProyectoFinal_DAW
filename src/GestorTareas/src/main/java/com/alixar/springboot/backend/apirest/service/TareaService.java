@@ -3,7 +3,6 @@ package com.alixar.springboot.backend.apirest.service;
 import java.util.List;
 
 import com.alixar.springboot.backend.apirest.models.Tarea;
-import com.alixar.springboot.backend.apirest.models.User;
 
 public interface TareaService {
 	
@@ -13,6 +12,6 @@ public interface TareaService {
 	public void delete(Tarea tarea);
 	public Tarea insertTarea(Tarea tarea);
 	
-	public List<Tarea> findTareaByUser(User user);
+	public List<Tarea> findTareaByUser(Long id);
 
 }

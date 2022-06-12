@@ -33,6 +33,7 @@ import { TareaService } from './tareas/tarea.service'
 import { TareasComponent } from './tareas/tareas.component';
 import { FormularioTareaComponent} from './tareas/formulario-tarea/formulario-tarea.component'
 import { TareaUsuarioComponent} from './tareas/tarea-usuario/tarea-usuario.component'
+import { ListaTareaUsuarioComponent} from  './tareas/lista-tarea-usuario/lista-tarea-usuario.component';
 
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
@@ -64,6 +65,7 @@ const routes: Routes = [
   {path:'tareas/form', component:FormularioTareaComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'tareas/form/:id', component:FormularioTareaComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'tareas/user/:id', component:TareaUsuarioComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
+  {path:'tareas/users', component:ListaTareaUsuarioComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ALUMNO'}},
   {path:'users/listaTutor', component:ListTutorComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/listaAlumnos', component:ListAlumnoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/listaProfesores', component:ListProfesorComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
@@ -110,7 +112,8 @@ const routes: Routes = [
     FormularioTareaComponent,
     AddEmpresaComponent,
     TareaUsuarioComponent,
-    ListAlumnoEmpresaComponent
+    ListAlumnoEmpresaComponent,
+    ListaTareaUsuarioComponent
    ],
   imports: [
     BrowserModule,
