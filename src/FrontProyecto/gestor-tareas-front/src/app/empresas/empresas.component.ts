@@ -53,7 +53,7 @@ export class EmpresasComponent implements OnInit {
       {
         label: "Ver Alumnos Asignados",
         icon: "pi pi-users",
-        //command: () => this.crearEditarEmpresa(true)
+        command: () => this.getUserEmpresa()
       },
 
     ]
@@ -120,6 +120,18 @@ export class EmpresasComponent implements OnInit {
     })
   }
 
+  getUserEmpresa() {
+
+    if(this.selectedEmpresa?.id != null) {
+
+      this.router.navigateByUrl('users/listaEmpresa/' + this.selectedEmpresa?.id)
+    } else {
+
+      this.messageService.add({severity: 'warning', summary: "Advertencia", detail: 'Seleccione un registro'})
+      return;
+    }
+    
+  }
 
 
 

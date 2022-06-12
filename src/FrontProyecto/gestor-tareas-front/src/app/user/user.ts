@@ -1,3 +1,4 @@
+import { Empresa } from '../empresas/empresa';
 export class User {
   id!:number;
   name!: string;
@@ -12,6 +13,7 @@ export class User {
   foto!:string;
   tutorReponsable!:number;
   profesorReponsable!:number;
+  empresa!:Empresa;
 
   constructor(){
     this.active=true;

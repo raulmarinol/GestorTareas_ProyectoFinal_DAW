@@ -50,6 +50,12 @@
               <button type="button" pButton pRipple icon="pi pi-file-o" (click)="todoTable.exportCSV()" class="p-mr-2" pTooltip="Exportar CSV" tooltipPosition="bottom"></button>
             </th>
             <th>
+              <div class="p-d-flex p-jc-between p-ai-center">
+                Fecha
+                <p-columnFilter type="date" field="date" display="menu"></p-columnFilter>
+              </div>
+            </th>
+            <th>
               <div class="col-12 md:col-4">
                 <div class="p-inputgroup">
                     <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>

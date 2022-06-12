@@ -4,15 +4,9 @@ p {
   margin-bottom: 0%;
 }
 
-footer {
-  position: relative;
-  margin-top: -50px;
-  height: 40px;
-  padding: 5px 0px;
-  clear: both;
-  background: black;
-  text-align: center;
-  color: white;
-  justify-content: center;
-  align-items: center;
+.footer {
+  position: absolute;
+  bottom: 0px;
+  height: 60px;
+  width:100%;
 }

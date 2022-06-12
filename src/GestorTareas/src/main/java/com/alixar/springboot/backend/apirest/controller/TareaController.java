@@ -31,11 +31,21 @@ public class TareaController {
 	@Autowired
 	private TareaServiceImpl tareaService;
 	
+	
+	/**
+	 * Devuelve una lista con todas las tareas
+	 * @return
+	 */
 	@GetMapping("/tareas")
 	public List<Tarea> index(){
 		return tareaService.findAll();
 	}
 	
+	/**
+	 * Devuelve una tarea pandole un id
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/tareas/{id}")
 	public ResponseEntity<?> show(@PathVariable Long id) {
 		
@@ -58,36 +68,52 @@ public class TareaController {
 		return new ResponseEntity<Tarea>(tarea, HttpStatus.OK) ;
 	}
 	
+	/**
+	 * Método para crear una nueva tarea
+	 * @param tarea
+	 * @param result
+	 * @return
+	 */
 	@PostMapping("/tareas")
-	public ResponseEntity<?> create(@Valid @RequestBody Tarea tarea,BindingResult result) {
-		
+	public ResponseEntity<?> create(@Valid @RequestBody Tarea tarea, BindingResult result) {
+
 		Tarea tareaNew = null;
-		
-		Map<String,Object> response = new HashMap<>();
-		
-		if(result.hasErrors()) {
-			List<String> errors = result.getFieldErrors()
-					.stream()
-					.map(err -> "El campo '"+err.getField() +"' "+err.getDefaultMessage())
-					.collect(Collectors.toList());			
-			
+
+		Map<String, Object> response = new HashMap<>();
+
+		if (result.hasErrors()) {
+
+			List<String> errors = result.getFieldErrors().stream()
+					.map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
+					.collect(Collectors.toList());
 			response.put("errors", errors);
-			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
-			
+
 		try {
-			tareaNew = tareaService.save(tarea);
+
+			tareaNew = tareaService.insertTarea(tarea);
 		} catch (DataAccessException e) {
+
 			response.put("mensaje", "Error al realizar el insert en la base de datos");
 			response.put("error", e.getMessage().concat(": ".concat(e.getMostSpecificCause().getMessage())));
-			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
-		response.put("mensaje", "La tarea ha sido creada con exito!");
+
+		response.put("mensaje", "La tarea ha sido creado con exito!");
 		response.put("tarea", tareaNew);
-		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
+
 	
+	
+	/**
+	 * Método para editar una tarea
+	 * @param tarea
+	 * @param result
+	 * @param id
+	 * @return
+	 */
 	@PutMapping("/tareas/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Tarea tarea,BindingResult result, @PathVariable Long id) {
 		

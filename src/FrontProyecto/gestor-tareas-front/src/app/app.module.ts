@@ -17,11 +17,13 @@ import { ListTutorComponent } from './user/list-tutor/list-tutor.component'
 import { ListAlumnoComponent } from './user/list-alumno/list-alumno.component'
 import { ListProfesorComponent } from './user/list-profesor/list-profesor.component'
 import { AddProfesorComponent} from './user/addProfesor/addProfesor.component'
+import { AddEmpresaComponent} from './user/addEmpresa/addEmpresa.component'
 import { AddTutorAlumnoComponent } from './user/addTutorAlumno/addTutorAlumno.component'
 import { GestionarLitaAlumnoProfesorComponent } from './user/gestionar-lita-alumno-profesor/gestionar-lita-alumno-profesor.component'
 import { GestionarListAlumnoTutorComponent} from './user/gestionar-list-alumno-tutor/gestionar-list-alumno-tutor.component'
 import { UnactiveusersComponent } from './user/unactiveusers/unactiveusers.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { ListAlumnoEmpresaComponent } from './user/list-alumno-empresa/list-alumno-empresa.component'
 
 import { EmpresaService} from './empresas/empresa.service'
 import { EmpresasComponent } from './empresas/empresas.component';
@@ -30,6 +32,7 @@ import { FormularioEmpresaComponent } from './empresas/formulario-empresa/formul
 import { TareaService } from './tareas/tarea.service'
 import { TareasComponent } from './tareas/tareas.component';
 import { FormularioTareaComponent} from './tareas/formulario-tarea/formulario-tarea.component'
+import { TareaUsuarioComponent} from './tareas/tarea-usuario/tarea-usuario.component'
 
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
@@ -60,9 +63,11 @@ const routes: Routes = [
   {path:'tareas', component:TareasComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'tareas/form', component:FormularioTareaComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'tareas/form/:id', component:FormularioTareaComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
+  {path:'tareas/user/:id', component:TareaUsuarioComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/listaTutor', component:ListTutorComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/listaAlumnos', component:ListAlumnoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/listaProfesores', component:ListProfesorComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
+  {path:'users/listaEmpresa/:id', component:ListAlumnoEmpresaComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/form', component:FormularioUsersComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'empresas/form', component:FormularioEmpresaComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'empresas/form/:id', component:FormularioEmpresaComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
@@ -70,6 +75,9 @@ const routes: Routes = [
   {path:'users/form/:id', component:FormularioUsersComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/unactive', component:UnactiveusersComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/addProfesor/:id', component:AddProfesorComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
+  {path:'users/addEmpresa/:id', component:AddEmpresaComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
+
+
   {path:'users/addTutor/:id', component:AddTutorAlumnoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ADMIN'}},
   {path:'users/profesor', component:GestionarLitaAlumnoProfesorComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'PROFESOR'}},
   {path:'users/tutor', component:GestionarListAlumnoTutorComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'TUTOR'}},
@@ -99,7 +107,10 @@ const routes: Routes = [
     AddProfesorComponent,
     AddTutorAlumnoComponent,
     FormularioEmpresaComponent,
-    FormularioTareaComponent
+    FormularioTareaComponent,
+    AddEmpresaComponent,
+    TareaUsuarioComponent,
+    ListAlumnoEmpresaComponent
    ],
   imports: [
     BrowserModule,

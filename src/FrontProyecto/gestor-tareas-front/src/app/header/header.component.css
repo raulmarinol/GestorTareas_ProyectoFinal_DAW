@@ -1,17 +1,7 @@
-.logo{
-  padding-right: 10px;
-}
-.navbar{
-  background-color: black;
-  color: bisque;
-  text-decoration: none;
-}
 a{
   color: white;
 }
 a:hover{
   color:gray
 }
-.dropdown-item{
-  color:black
-}
+

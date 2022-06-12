@@ -9,4 +9,5 @@ public interface EmpresaService {
 	public Empresa findById(Long id);	
 	public Empresa save(Empresa empresa);	
 	public void delete(Empresa empresa);
+	public Empresa insertEmpresa(Empresa empresa);
 }

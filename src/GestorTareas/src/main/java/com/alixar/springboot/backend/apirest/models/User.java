@@ -77,10 +77,12 @@ public class User implements Serializable {
 		super();
 	}
 
+	
 	public User(Long id, @NotEmpty(message = "no puede estar vacio") @Valid String name,
 			@NotEmpty(message = "no puede estar vacio") @Size(min = 4, max = 20, message = "entre 4 y 20 caracteres") @Valid String surName,
 			@Email(message = "debe ser un email valido") @NotEmpty(message = "no puede estar vacio") String email,
-			String password, String rol, String phone, Boolean active, String foto) {
+			String password, String rol, String phone, Boolean active, String foto, Long profesorReponsable,
+			Long tutorReponsable, Empresa empresa, Set<Tarea> tarea) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -91,7 +93,13 @@ public class User implements Serializable {
 		this.phone = phone;
 		this.active = active;
 		this.foto = foto;
+		this.profesorReponsable = profesorReponsable;
+		this.tutorReponsable = tutorReponsable;
+		this.empresa = empresa;
+		this.tarea = tarea;
 	}
+
+
 
 	public Long getId() {
 		return id;

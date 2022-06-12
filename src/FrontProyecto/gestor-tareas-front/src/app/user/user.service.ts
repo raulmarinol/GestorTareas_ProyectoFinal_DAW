@@ -7,11 +7,13 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import {ResponseEntity} from './responseentity';
 import { AuthService } from '../login/auth.service';
+import { Empresa } from '../empresas/empresa';
 
 @Injectable()
 export class UserService {
 
   private urlEndPoint:string = 'http://localhost:8080/users';
+  private urlEndPointEmpresa:string = 'http://localhost:8080/usersEmpresa';
   private urlEndPointInactivos:string ='http://localhost:8080/users/unactive'
   private urlEndPointDeactivated:string ='http://localhost:8080/users/deac'
   private header=new HttpHeaders().set('Authorization', `Bearer ${sessionStorage.getItem('token')}` || '');
@@ -64,9 +66,15 @@ export class UserService {
     return this.http.get<User[]>(`${this.urlEndPoint}/profesor?id=${id}`,{headers:this.header});
   }
 
-  getUserByTutor
-  (id:number): Observable<User[]>{
+  getUserByTutor(id:number): Observable<User[]>{
     return this.http.get<User[]>(`${this.urlEndPoint}/tutor?id=${id}`,{headers:this.header});
+  }
+
+  getUserByEmpresaID(id:number): Observable<User[]>{
+
+    let path = this.urlEndPoint + "/empresa/" + id;
+
+    return this.http.get<User[]>(path,{headers:this.header});
   }
 
   create(user: User): Observable<User>{
@@ -101,7 +109,24 @@ export class UserService {
 
 
   update(user: User): Observable<User>{
+
+
     return this.http.put<User>(`${this.urlEndPoint}/${user.id}`, user, {headers:this.header}).pipe(
+      catchError(e=>{
+        if(e.status==400){
+          return throwError(()=>e);
+        }
+        this.router.navigate(['/users']);
+        console.error(e.error.mensaje);
+        Swal.fire('Error al actualizar',e.error.mensaje, 'error');
+        return throwError(()=>e);
+      })
+      );
+  }
+
+  updateEmpresa(user: User): Observable<User>{
+
+    return this.http.put<User>(`${this.urlEndPointEmpresa}/${user.id}?idEmpresa=${user.empresa}`, user, {headers:this.header}).pipe(
       catchError(e=>{
         if(e.status==400){
           return throwError(()=>e);
@@ -129,6 +154,10 @@ export class UserService {
       })
       );
   }
+
+
+
+
 
 
 }

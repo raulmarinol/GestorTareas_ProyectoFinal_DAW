@@ -24,6 +24,10 @@ export class TareasComponent implements OnInit {
   ngOnInit(): void {
 
     this.tareaService.getTareas().subscribe( tarea => this.tarea = tarea )
+
+    this.tarea.forEach(
+      tarea => (tarea.registDate = new Date(tarea.registDate))
+    )
     this.cols = [
       {field: "id", header: "Id de la Tarea"},
       {field: "registDate", header: "Fecha"},

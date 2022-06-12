@@ -34,12 +34,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alixar.springboot.backend.apirest.models.Empresa;
 import com.alixar.springboot.backend.apirest.models.Mail;
 import com.alixar.springboot.backend.apirest.models.User;
+import com.alixar.springboot.backend.apirest.service.EmpresaServiceImpl;
 import com.alixar.springboot.backend.apirest.service.IUploadFileService;
 import com.alixar.springboot.backend.apirest.service.MailServiceImpl;
 import com.alixar.springboot.backend.apirest.service.Password;
 import com.alixar.springboot.backend.apirest.service.UserServiceImpl;
+
 
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
@@ -47,6 +50,9 @@ public class UserController {
 
 	@Autowired
 	private UserServiceImpl userService;
+	
+	@Autowired
+	private EmpresaServiceImpl empresaSevice;
 
 	@Autowired
 	private MailServiceImpl mailService;	
@@ -166,9 +172,9 @@ public class UserController {
 	 * @param id
 	 * @return
 	 */
-	@PutMapping("/users/{id}")
+	@PutMapping("/users/{id}")	
 	public ResponseEntity<?> update(@Valid @RequestBody User user, BindingResult result, @PathVariable Long id) {
-
+		
 		User userActual = userService.findUserById(id);
 
 		Map<String, Object> response = new HashMap<>();
@@ -196,6 +202,7 @@ public class UserController {
 			userActual.setPhone(user.getPhone());
 			userActual.setProfesorReponsable(user.getProfesorReponsable());
 			userActual.setTutorReponsable(user.getTutorReponsable());
+			
 
 			userService.updateUser(userActual);
 
@@ -210,6 +217,64 @@ public class UserController {
 
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
+	
+	/**
+	 * Actualiza la empresa del usuario
+	 * 
+	 * @param user
+	 * @param result
+	 * @param id
+	 * @return
+	 */
+	@PutMapping("/usersEmpresa/{id}")	
+	public ResponseEntity<?> updateEmpresa(@Valid @RequestBody User user, BindingResult result, @PathVariable Long id,@RequestParam Long idEmpresa) {
+		Empresa empresa=new Empresa();
+		if(idEmpresa!=0 && idEmpresa!=null) {
+			 empresa = empresaSevice.findById(idEmpresa);
+		}
+		User userActual = userService.findUserById(id);
+
+		Map<String, Object> response = new HashMap<>();
+
+		if (result.hasErrors()) {
+			List<String> errors = result.getFieldErrors().stream()
+					.map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
+					.collect(Collectors.toList());
+
+			response.put("errors", errors);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
+
+		if (userActual == null) {
+			response.put("mensaje", "Error: no se pudo editar. El usuario con ID: "
+					.concat(id.toString().concat(" no existe en la base de datos")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+
+		try {
+			userActual.setName(user.getName());
+			userActual.setSurName(user.getSurName());
+			userActual.setEmail(user.getEmail());
+			userActual.setPassword(new BCryptPasswordEncoder(15).encode(user.getPassword()));
+			userActual.setPhone(user.getPhone());
+			userActual.setProfesorReponsable(user.getProfesorReponsable());
+			userActual.setTutorReponsable(user.getTutorReponsable());
+			userActual.setEmpresa(empresa);
+
+			userService.updateUser(userActual);
+
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al actualizar en la base de datos");
+			response.put("error", e.getMessage().concat(": ".concat(e.getMostSpecificCause().getMessage())));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		response.put("mensaje", "El usuario ha sido modificado con exito!");
+		response.put("user", userActual);
+
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+	}
+
 
 	/**
 	 * metodo para desactivar elementos de la tabla usuarios por id , guarda el
@@ -358,6 +423,16 @@ public class UserController {
 		
 		return userService.findUserByTutorReponsable(id);
 	}
+	
+	@GetMapping("/users/empresa/{id}")
+	
+	public List<User> usersEmpresa(@PathVariable Long id) {
+		
+		if ( id == null) return null;
+
+		return userService.findBYEmpresa(id);
+	}
+	
 
 
 	

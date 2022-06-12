@@ -20,3 +20,13 @@
   width: 100%;
   text-align: center;
 }
+
+html {
+  min-height: 100%;
+  position: relative;
+}
+body {
+  margin: 0;
+  margin-bottom: 5rem;
+}
+footer { width: 100%; display: flex; flex-wrap: wrap; align-self: flex-end;}

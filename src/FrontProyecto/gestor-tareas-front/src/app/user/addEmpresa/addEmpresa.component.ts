@@ -1,31 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { Empresa } from '../../empresas/empresa';
+import { EmpresaService} from '../../empresas/empresa.service';
 import { Router,ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-addProfesor',
-  templateUrl: './addProfesor.component.html',
-  styleUrls: ['./addProfesor.component.css']
+  selector: 'app-addEmpresa',
+  templateUrl: './addEmpresa.component.html',
+  styleUrls: ['./addEmpresa.component.css']
 })
-export class AddProfesorComponent implements OnInit {
+export class AddEmpresaComponent implements OnInit {
 
   usuario!: User;
-  listaProfesor: User[]=[];
+  listaEmpresas: Empresa[]=[];
 
-  titulo:string= "Cambiar profesor asignado"
-  titulo2:string= "Cambiar profesor asignado"
+  titulo:string= "Cambiar empresa asignado"
+  titulo2:string= "Cambiar empresa asignado"
 
   errores:string[]=[];
 
-
-  constructor(private usuarioService: UserService, private router:Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private usuarioService: UserService,private empresaService: EmpresaService ,private router:Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.cargarUsuario();
     this.usuario=new User();
-    this.cargarListaProfesores();
+    this.cargarListaEmpresas();
+    console.log(this.cargarListaEmpresas()+"aqui toi");
+    console.log("aqui toi");
   }
 
   cargarUsuario(): void{
@@ -33,9 +36,8 @@ export class AddProfesorComponent implements OnInit {
       let id= params['id']
       if (id){
         this.usuarioService.getUser(id).subscribe({
-          next: usuario => {console.log
+          next: usuario => {
             this.usuario=usuario
-            console.log(usuario);
 
        }
       })
@@ -43,12 +45,11 @@ export class AddProfesorComponent implements OnInit {
     })
   }
 
-  cargarListaProfesores(){
-    this.usuarioService.getUsersbyRol("PROFESOR").subscribe({
-      next:(listaProfesor)=>{
-        this.listaProfesor=listaProfesor;
-        console.log(listaProfesor);
-
+  cargarListaEmpresas(){
+    this.empresaService.getEmpresas().subscribe({
+      next:(listaEmpresas)=>{
+        this.listaEmpresas=listaEmpresas;
+        console.log(listaEmpresas);
       }
     });
   }
@@ -69,8 +70,9 @@ export class AddProfesorComponent implements OnInit {
   }
 
   update(): void{
+    //let idempresa=this.usuario.empresa
 
-    this.usuarioService.update(this.usuario).subscribe({
+    this.usuarioService.updateEmpresa(this.usuario).subscribe({
       next: usuario=>{
 
         this.router.navigate(['/users/listaAlumnos'])
@@ -78,7 +80,7 @@ export class AddProfesorComponent implements OnInit {
       },
       error: err =>{
         this.errores=err.error.errors as string[];
-        console.error(err.error.errors)
+        console.error(err.error.errors);
       }
 
 
@@ -86,4 +88,6 @@ export class AddProfesorComponent implements OnInit {
 
     )
   }
+
+
 }

@@ -28,7 +28,7 @@ create(tarea: Tarea): Observable<Tarea>{
       if(e.status==400){
         return throwError(()=>e);
       }
-      this.router.navigate(['/tareas/list']);
+      this.router.navigate(['/tareas']);
       console.error(e.error.mensaje);
       Swal.fire('Error al crear',e.error.mensaje, 'error');
       return throwError(()=>e);

@@ -61,7 +61,7 @@ export class ListAlumnoComponent implements OnInit {
         label: "Ver Tareas",
         icon: "pi pi-book",
         //command: () =>   Cambiar que te lleve a ver las tareas del alumno
-      },      
+      },
       {
         label: "Asignar Profesor",
         icon: "pi pi-user-edit",
@@ -75,10 +75,10 @@ export class ListAlumnoComponent implements OnInit {
       {
         label: "Asignar Empresa",
         icon: "pi pi-shopping-bag",
-        //command: () =>   Cambiar Para asignar profesor
+        command: () => this.addEmpresa(true)
       },
 
-      
+
     ]
     this.items2 = [
       {
@@ -94,6 +94,21 @@ export class ListAlumnoComponent implements OnInit {
       if(this.selectedUser?.id != null) {
 
         this.router.navigateByUrl('/users/addTutor/' + this.selectedUser?.id)
+      } else {
+
+        this.messageService.add({severity: 'warning', summary: "Advertencia", detail: 'Seleccione un registro'})
+        return;
+      }
+
+    }
+  }
+
+  addEmpresa(editar: boolean){
+
+    if (editar) {
+      if(this.selectedUser?.id != null) {
+
+        this.router.navigateByUrl('/users/addEmpresa/' + this.selectedUser?.id)
       } else {
 
         this.messageService.add({severity: 'warning', summary: "Advertencia", detail: 'Seleccione un registro'})

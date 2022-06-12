@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { EmpresaService} from '../../empresas/empresa.service';
+import { Empresa } from '../../empresas/empresa';
 import { Router,ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 @Component({
@@ -18,16 +20,17 @@ export class FormularioUsersComponent implements OnInit {
   errores:string[]=[];
 
 
-  constructor(private usuarioService: UserService, private router:Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private usuarioService: UserService,private empresaService: EmpresaService , private router:Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.cargarUsuario()
+    this.cargarUsuario();
     this.usuario=new User();
   }
 
   cargarUsuario(): void{
     this.activatedRoute.params.subscribe(params=>{
       let id= params['id']
+      console.log(id+" esta es id");
       if (id){
         this.usuarioService.getUser(id).subscribe({
           next: usuario => {
@@ -38,7 +41,7 @@ export class FormularioUsersComponent implements OnInit {
     })
   }
 
-  create(): void{
+  create(): void{;
     this.usuarioService.create(this.usuario).subscribe({
       next: usuario =>{
         this.router.navigate(['/users'])

@@ -40,4 +40,9 @@ public class EmpresaServiceImpl implements EmpresaService{
 		
 	}
 
+	@Override
+	public Empresa insertEmpresa(Empresa empresa) {
+		return empresaRepo.save(empresa);
+	}
+
 }

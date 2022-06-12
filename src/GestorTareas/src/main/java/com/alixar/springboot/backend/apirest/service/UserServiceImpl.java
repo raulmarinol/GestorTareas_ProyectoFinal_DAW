@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alixar.springboot.backend.apirest.models.Empresa;
 import com.alixar.springboot.backend.apirest.models.User;
 import com.alixar.springboot.backend.apirest.repository.UserRepository;
 
@@ -52,8 +53,7 @@ public class UserServiceImpl implements UserService {
 	public User insertUser(User user) {
 
 
-			return userRepo.save(user);
-		
+			return userRepo.save(user);	
 
 		
 	}
@@ -121,5 +121,36 @@ public class UserServiceImpl implements UserService {
 		
 		return userRepo.findUserByTutorReponsable(id);
 	}
+
+	
+	
+
+	@Override
+	public List<User> findAllByEmpresa(Empresa empresa) {
+		// TODO Auto-generated method stub
+		return userRepo.findAllByEmpresa(empresa);
+	}
+
+	@Override
+	public List<User> findUserByEmpresaId(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> findBYEmpresa(long id) {
+		// TODO Auto-generated method stub
+		return userRepo.findBYEmpresa(id);
+	}
+
+	
+
+	
+
+	
+
+	
+
+	
 
 }

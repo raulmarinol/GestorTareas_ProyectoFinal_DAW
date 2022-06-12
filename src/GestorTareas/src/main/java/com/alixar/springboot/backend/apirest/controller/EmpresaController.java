@@ -1,5 +1,6 @@
 package com.alixar.springboot.backend.apirest.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alixar.springboot.backend.apirest.models.Empresa;
+import com.alixar.springboot.backend.apirest.models.Mail;
+import com.alixar.springboot.backend.apirest.models.User;
 import com.alixar.springboot.backend.apirest.service.EmpresaServiceImpl;
 
 @CrossOrigin(origins = { "http://localhost:4200" })
@@ -59,33 +63,34 @@ public class EmpresaController {
 	}
 	
 	@PostMapping("/empresas")
-	public ResponseEntity<?> create(@Valid @RequestBody Empresa empresa,BindingResult result) {
-		
+	public ResponseEntity<?> create(@Valid @RequestBody Empresa empresa, BindingResult result) {
+
 		Empresa empresaNew = null;
-		
-		Map<String,Object> response = new HashMap<>();
-		
-		if(result.hasErrors()) {
-			List<String> errors = result.getFieldErrors()
-					.stream()
-					.map(err -> "El campo '"+err.getField() +"' "+err.getDefaultMessage())
-					.collect(Collectors.toList());			
-			
+
+		Map<String, Object> response = new HashMap<>();
+
+		if (result.hasErrors()) {
+
+			List<String> errors = result.getFieldErrors().stream()
+					.map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
+					.collect(Collectors.toList());
 			response.put("errors", errors);
-			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
-			
+
 		try {
-			empresaNew = empresaService.save(empresa);
+
+			empresaNew = empresaService.insertEmpresa(empresa);
 		} catch (DataAccessException e) {
+
 			response.put("mensaje", "Error al realizar el insert en la base de datos");
 			response.put("error", e.getMessage().concat(": ".concat(e.getMostSpecificCause().getMessage())));
-			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
-		response.put("mensaje", "La empresa ha sido creada con exito!");
+
+		response.put("mensaje", "La empresa ha sido creado con exito!");
 		response.put("empresa", empresaNew);
-		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/empresas/{id}")

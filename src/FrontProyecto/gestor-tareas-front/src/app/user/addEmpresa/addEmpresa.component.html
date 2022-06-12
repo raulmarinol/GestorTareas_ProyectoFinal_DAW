@@ -1,0 +1,63 @@
+<div class="card border-dark mb-3">
+  <div class="card-header" *ngIf="!usuario">{{ titulo }}</div>
+  <div class="card-header" *ngIf="usuario">{{ titulo2 }}</div>
+  <div class="card-body">
+
+
+    <form #usuarioForm="ngForm">
+
+      <h2 class="text-center">Añadir/Cambiar empresa asignado para {{usuario.name}} {{usuario.surName}}</h2>
+
+      <div class="form-group row pb-2">
+        <label for="" class="col-form-label col-sm-3">EMPRESAS</label>
+        <div class="col-sm-9">
+            <select class="form-select" name="EmpresaAsignada" #type="ngModel" #EmpresaAsignada="ngModel" [(ngModel)]="usuario.empresa"
+            required="true">
+            <option [value]="lisEmpr.id" *ngFor="let lisEmpr of listaEmpresas">{{lisEmpr.nombre}}</option>
+            </select>
+
+          <div
+            class="alert alert-danger"
+            *ngIf="EmpresaAsignada.invalid && (EmpresaAsignada.dirty || EmpresaAsignada.touched)"
+          >
+            <div *ngIf="EmpresaAsignada.errors?.['required']">La emppresa es necesaria</div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <div class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+              <button
+                class="btn btn-primary"
+                role="button"
+                (click)="create()"
+                *ngIf="!usuario.id; else elseBlock"
+                [disabled]="!usuarioForm.form.valid"
+              >
+                Crear
+              </button>
+
+              <ng-template #elseBlock>
+                <button
+                  class="btn btn-primary"
+                  role="button"
+                  (click)="update()"
+                  [disabled]="!usuarioForm.form.valid"
+                >
+                  Editar
+                </button>
+              </ng-template>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+

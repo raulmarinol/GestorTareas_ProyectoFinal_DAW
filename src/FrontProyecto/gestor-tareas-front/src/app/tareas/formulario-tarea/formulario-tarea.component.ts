@@ -3,6 +3,7 @@ import { Tarea } from '../tarea';
 import { TareaService } from '../tarea.service';
 import { Router,ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-formulario-tarea',
@@ -18,6 +19,7 @@ export class FormularioTareaComponent implements OnInit {
   titulo2:string= "Crear Tarea"
 
   errores:string[]=[];
+  jwt: JwtHelperService = new JwtHelperService();
 
   constructor(private tareaService: TareaService, private router:Router, private activatedRoute: ActivatedRoute) { }
 
@@ -40,6 +42,7 @@ export class FormularioTareaComponent implements OnInit {
   }
 
   create(): void{
+
     this.tareaService.create(this.tarea).subscribe({
       next: tarea =>{
         this.router.navigate(['/tareas'])
@@ -52,6 +55,11 @@ export class FormularioTareaComponent implements OnInit {
       }
     }
     )
+  }
+
+  findIdUser():number {
+
+    return this.jwt.decodeToken(sessionStorage.getItem('token')!).id;
   }
 
   update(): void{

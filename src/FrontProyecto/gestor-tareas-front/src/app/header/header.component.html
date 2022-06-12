@@ -1,59 +1,61 @@
-<nav class="navbar navbar-expand-lg" *ngIf="user">
+<nav class="navbar navbar-expand-lg navbar-white bg-black" *ngIf="user">
   <div class="container-fluid">
-
-    <div class="d-flex justify-content-between">
-      <img
-      class="logo"
+    <img
+      class="logo navbar-brand"
       src="./assets/img/logo.png"
       width="10%"
       height="5%"
       href="#"
     />
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
+
+    <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+      data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <i class="fas fa-bars text-light"></i>
     </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#"
-              ><i class="pi pi-home"></i> Home</a
-            >
-          </li>
-          <li class="nav-item" *ngIf="loggedRole === 'ADMIN'">
-            <a class="nav-link" href="/users"
-              ><i class="pi pi-users"></i> Lista de Usuarios</a
-            >
-          </li>
-          <li class="nav-item" *ngIf="loggedRole === 'ADMIN'">
-            <a class="nav-link" href="/tareas"
-              ><i class="pi pi-book"></i> Lista de Tareas</a
-            >
-          </li>
-          <li class="nav-item" *ngIf="logueado()">
-            <a class="nav-link" (click)="logout()"
-              ><i class="pi pi-ban"></i> Cerrar Sesión</a
-            >
-          </li>
-          <li class="nav-item" *ngIf="logueado()">
-            <a class="nav-link" onclick="history.back()"
-              ><i class="pi pi-fast-backward"></i> Atras</a
-            >
-          </li>
-          <li class="nav-item" *ngIf="logueado()">
-            <a class="nav-link" href="/perfil"
-              ><i class="pi pi-user"></i> Perfil</a
-            >
-          </li>
-        </ul>
-      </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto d-flex flex-row mt-3 mt-lg-0">
+        <li class="nav-item text-center mx-2 mx-lg-1">
+          <a class="nav-link active" aria-current="page" href="#"
+            ><i class="pi pi-home"></i> Home</a
+          >
+        </li>
+        <li class="nav-item text-center mx-2 mx-lg-1" *ngIf="loggedRole === 'ADMIN'">
+          <a class="nav-link" href="/users"
+            ><i class="pi pi-users"></i> Lista de Usuarios</a
+          >
+        </li>
+        <li class="nav-item text-center mx-2 mx-lg-1" *ngIf="loggedRole === 'ADMIN'">
+          <a class="nav-link" href="/tareas"
+            ><i class="pi pi-book"></i> Lista de Tareas</a
+          >
+        </li>
+
+        <li class="nav-item text-center mx-2 mx-lg-1" *ngIf="logueado()">
+          <a class="nav-link" href="/perfil"
+            ><i class="pi pi-user"></i> Perfil</a
+          >
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ms-auto d-flex flex-row mt-3 mt-lg-0">
+        <li class="nav-item text-center mx-2 mx-lg-1" *ngIf="logueado()">
+          <a class="nav-link" onclick="history.back()"
+            ><i class="pi pi-backward"></i> Volver</a
+          >
+        </li>
+        <li class="nav-item text-center mx-2 mx-lg-1" *ngIf="logueado()">
+          <a class="nav-link" (click)="logout()"
+            ><i class="pi pi-ban"></i> Cerrar Sesión</a
+          >
+        </li>
+
+      </ul>
+
+
     </div>
   </div>
 </nav>
+
