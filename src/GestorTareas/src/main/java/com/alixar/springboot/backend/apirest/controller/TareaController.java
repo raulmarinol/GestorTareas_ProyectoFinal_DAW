@@ -19,10 +19,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alixar.springboot.backend.apirest.models.Tarea;
+import com.alixar.springboot.backend.apirest.models.User;
 import com.alixar.springboot.backend.apirest.service.TareaServiceImpl;
+import com.alixar.springboot.backend.apirest.service.UserServiceImpl;
 
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
@@ -30,6 +33,9 @@ public class TareaController {
 
 	@Autowired
 	private TareaServiceImpl tareaService;
+	
+	@Autowired
+	private UserServiceImpl userService;
 	
 	
 	/**
@@ -74,10 +80,15 @@ public class TareaController {
 	 * @param result
 	 * @return
 	 */
-	@PostMapping("/tareas")
-	public ResponseEntity<?> create(@Valid @RequestBody Tarea tarea, BindingResult result) {
-
-		Tarea tareaNew = null;
+	@PutMapping("/tareas/")
+	public ResponseEntity<?> create(@Valid @RequestBody Tarea tarea, BindingResult result,@RequestParam Long idUser) {
+		
+		User user=new User();
+		if(idUser!=0 && idUser!=null) {
+			user = userService.findUserById(idUser);
+		}
+		
+	
 
 		Map<String, Object> response = new HashMap<>();
 
@@ -91,8 +102,8 @@ public class TareaController {
 		}
 
 		try {
-
-			tareaNew = tareaService.insertTarea(tarea);
+			tarea.setUser(user);
+			tareaService.insertTarea(tarea);
 		} catch (DataAccessException e) {
 
 			response.put("mensaje", "Error al realizar el insert en la base de datos");
@@ -101,7 +112,7 @@ public class TareaController {
 		}
 
 		response.put("mensaje", "La tarea ha sido creado con exito!");
-		response.put("tarea", tareaNew);
+		response.put("tarea", tarea);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 
@@ -141,7 +152,7 @@ public class TareaController {
 		try {
 			tareaActual.setRegistDate(tarea.getRegistDate());
 			tareaActual.setTiempoTarea(tarea.getTiempoTarea());
-			tareaActual.setTareaDesarrollada(tarea.getTareaDesarrollada());			
+			tareaActual.setTareaDesarrollada(tarea.getTareaDesarrollada());
 		
 		tareaUpdate = tareaService.save(tareaActual);
 		

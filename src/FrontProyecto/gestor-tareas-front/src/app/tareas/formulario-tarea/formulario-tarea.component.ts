@@ -45,7 +45,7 @@ export class FormularioTareaComponent implements OnInit {
 
     this.tareaService.create(this.tarea).subscribe({
       next: tarea =>{
-        this.router.navigate(['/tareas'])
+        this.router.navigate(['/tareas/users'])
         Swal.fire('Nueva Tarea', `Tarea con ${this.tarea.id} creada con éxito!`, 'success')
       },
       error: err =>{
@@ -67,7 +67,7 @@ export class FormularioTareaComponent implements OnInit {
     this.tareaService.update(this.tarea).subscribe({
       next: empresa=>{
 
-        this.router.navigate(['/tareas'])
+        this.router.navigate(['/tareas/users'])
         Swal.fire('Tarea Actualizada', `Tarea ${this.tarea.id}  actualizado con éxtio!`, 'success')
       },
       error: err =>{

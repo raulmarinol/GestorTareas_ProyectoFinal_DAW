@@ -29,7 +29,8 @@ import com.alixar.springboot.backend.apirest.service.EmpresaServiceImpl;
 public class EmpresaController {
 	
 	@Autowired
-	private EmpresaServiceImpl empresaService; 
+	private EmpresaServiceImpl empresaService;
+	
 	
 	@GetMapping("/empresas")
 	public List<Empresa> index(){

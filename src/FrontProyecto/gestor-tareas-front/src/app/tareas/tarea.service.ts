@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { AuthService } from '../login/auth.service';
 import { Tarea } from './tarea';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable()
 export class TareaService {
@@ -13,6 +14,7 @@ export class TareaService {
   private urlEndPoint:string = 'http://localhost:8080/tareas';
   private httpHeaders=new HttpHeaders().set('Authorization', `Bearer ${sessionStorage.getItem('token')}` || '');
   private header=new HttpHeaders().set('Authorization', `Bearer ${sessionStorage.getItem('token')}` || '');
+  jwt: JwtHelperService = new JwtHelperService();
 
 constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
 
@@ -21,8 +23,12 @@ getTareas(): Observable<Tarea[]>{
 }
 
 create(tarea: Tarea): Observable<Tarea>{
-
-  return this.http.post(this.urlEndPoint, tarea, {headers: this.httpHeaders}).pipe(
+   //Obtengo el usuario de session 
+   let token = sessionStorage.getItem('token')!;
+   let idUsuario= this.jwt.decodeToken(token).id; 
+   
+   return this.http.put<Tarea>(`${this.urlEndPoint}/?idUser=${idUsuario}`, tarea, {headers:this.header}).pipe(
+ 
     map((response:any) => response.tarea as Tarea ),
     catchError(e=>{
       if(e.status==400){
@@ -55,6 +61,9 @@ getTarea(id: number): Observable<Tarea>{
 }
 
 update(tarea: Tarea): Observable<Tarea>{
+
+  
+
   return this.http.put<Tarea>(`${this.urlEndPoint}/${tarea.id}`,tarea, {headers: this.httpHeaders}).pipe(
     catchError(e=>{
       if(e.status==400){
