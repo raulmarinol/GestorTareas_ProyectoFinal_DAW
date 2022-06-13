@@ -3,8 +3,8 @@
 #### Curso Escolar 2021-2022
 #### Autor: Raúl Mariño López(https://github.com/raulmarinol/Proyecto_Final_DAW)
 #### Tutor: José María García Durán(Enlace a su cuenta de gitHub)
-#### Fecha de Inicio: 01/04/2021
-#### Fecha de Finalización: DD-MM-YYYY
+#### Fecha de Inicio: 01/04/2022
+#### Fecha de Finalización: 15/06/2022
 
 ## Breve descripción del proyecto
 
