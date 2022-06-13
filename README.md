@@ -15,9 +15,9 @@ Este proyecto consiste en una aplicación web en la que se prodra gestionar las 
 
 Este proyecto permitira una mayor comunicación entre los alumnos y el profesorado.
 La aplicación web permitira la creación de nuevos profesores, alumnos y tutores de las diferentes empresas.
-Los alumnos prodran gestionar las tareas que realizaras durante su formación, a su vez prodran hacer una busqueda entre dos fechas concretas y generar un PDF el cual sera enviado a su tutor de la empresa para que este lo firme y se lo reenvie a  su tutor de FTC del instituto.
+Los alumnos prodran gestionar las tareas que realizaras durante su formación.Podran exportar estar tareas en formato csv.
 El administrador de la aplicación podra realizar todas las operaciones correspondientes de la aplicación menos editar tareas. Sera el encargado de de dar de alta a los profesores.
-Los profesores seran lo encargados a dar de alta a los alumnos que les corresponde y a los tutores de las empresas donde estan realizando las practicas dichos añumnos.
+Los profesores seran lo encargados a dar de alta a los alumnos que les corresponde y a los tutores de las empresas donde estan realizando las practicas dichos alumnos.
 Los alumnos solo podran gestionar el CRUD correspondiente a las tareas que ellos realizen y editar algun datos de ellos mismos.
 Los tutores de las empresa solo podran ver un listado de los alumnos de su propia empresa, las tareas que estos han realizado y editar algún dato de ellos mismos. 
 
