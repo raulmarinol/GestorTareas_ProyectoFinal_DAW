@@ -13,6 +13,7 @@
         <div class="col-sm-9">
             <select class="form-select" name="EmpresaAsignada" #type="ngModel" #EmpresaAsignada="ngModel" [(ngModel)]="usuario.empresa"
             required="true">
+            <option disable>Elige una empresa</option>
             <option [value]="lisEmpr.id" *ngFor="let lisEmpr of listaEmpresas">{{lisEmpr.nombre}}</option>
             </select>
 
