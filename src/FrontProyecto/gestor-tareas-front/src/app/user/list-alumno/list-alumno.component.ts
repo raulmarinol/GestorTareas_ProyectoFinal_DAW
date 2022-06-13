@@ -69,7 +69,7 @@ export class ListAlumnoComponent implements OnInit {
       },
       {
         label: "Asignar Tutor",
-        icon: "pi pi-book",
+        icon: "pi pi-user-plus",
         command: () => this.addTutor(true)
       },
       {

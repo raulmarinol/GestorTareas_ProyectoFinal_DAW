@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -167,7 +166,11 @@ public class TareaController {
 		
 		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
 	}
-	
+	/**
+	 * Metodo para eliminar una empresa pasandole la id de esta
+	 * @param id
+	 * @return
+	 */
 	@DeleteMapping("/tareas/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		Map<String,Object> response = new HashMap<>();
@@ -185,14 +188,19 @@ public class TareaController {
 		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
 	}
 	
-@GetMapping("/tareas/user/{id}")
-	
-	public List<Tarea> usersTareas(@PathVariable Long id) {
+	/**
+	 * Metodo para obtener todas las tareas de un usuario
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/tareas/user/{id}")
 		
-		if ( id == null) return null;
-
-		return tareaService.findTareaByUser(id);
+		public List<Tarea> usersTareas(@PathVariable Long id) {
+			
+			if ( id == null) return null;
+	
+			return tareaService.findTareaByUser(id);
+		}
+	
 	}
-
-}
 

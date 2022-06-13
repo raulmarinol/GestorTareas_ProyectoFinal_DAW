@@ -63,16 +63,18 @@ public class UserController {
 	@Autowired
 	IUploadFileService uploadService;
 
+	/**
+	 * Devuelve toddos los usuarios de la base de datos
+	 * @return
+	 */
 	@GetMapping("/users")
 	public List<User> index() {
-
-		// Recoge todos los usuarios de la base de datos
 
 		return userService.getAllUsers();
 	}
 
 	/**
-	 * lista usuarios inactivos
+	 * Devuelve toddos los usuarios de la base de datos que estan inactivos
 	 * 
 	 * @return
 	 */
@@ -409,6 +411,12 @@ public class UserController {
 		return userService.findEmpleadoByRol(rol);
 	}
 	
+	/**
+	 * Devuelve los usuarios que estan bajo la supervisión de un profesor
+	 * @param id
+	 * @return
+	 */
+	
 	@GetMapping("/users/profesor")
 	public List<User> findUserByProfesorReponsable(@RequestParam Long id) {
 	
@@ -416,7 +424,11 @@ public class UserController {
 		return userService.findUserByProfesorReponsable(id);
 	}
 	
-	
+	/**
+	 * Devuelve los usuarios que estan bajo la supervisión de un tutor
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/users/tutor")
 	public List<User> findUserByTutorReponsable(@RequestParam Long id) {
 	
@@ -424,6 +436,11 @@ public class UserController {
 		return userService.findUserByTutorReponsable(id);
 	}
 	
+	/**
+	 * Devuelve los alumnos que están asignados a una empresa
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/users/empresa/{id}")
 	
 	public List<User> usersEmpresa(@PathVariable Long id) {
@@ -431,11 +448,7 @@ public class UserController {
 		if ( id == null) return null;
 
 		return userService.findBYEmpresa(id);
-	}
-	
-
-
-	
+	}	
 	
 		
 }

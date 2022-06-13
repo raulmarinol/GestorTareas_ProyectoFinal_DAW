@@ -107,9 +107,7 @@ export class UserService {
     return this.http.get<User>(`${this.urlEndPoint}/${id}`,{headers:this.header})
   }
 
-
   update(user: User): Observable<User>{
-
 
     return this.http.put<User>(`${this.urlEndPoint}/${user.id}`, user, {headers:this.header}).pipe(
       catchError(e=>{
@@ -154,10 +152,4 @@ export class UserService {
       })
       );
   }
-
-
-
-
-
-
 }

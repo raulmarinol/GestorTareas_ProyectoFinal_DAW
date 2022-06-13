@@ -31,12 +31,20 @@ public class EmpresaController {
 	@Autowired
 	private EmpresaServiceImpl empresaService;
 	
-	
+	/**
+	 * Deluelve una lista con todas las empresas de la base de datos
+	 * @return
+	 */
 	@GetMapping("/empresas")
 	public List<Empresa> index(){
 		return empresaService.findAll();
 	}
 	
+	/**
+	 * Devuelve una empresa pasandole una id
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/empresas/{id}")
 	public ResponseEntity<?> show(@PathVariable Long id) {
 		
@@ -59,6 +67,12 @@ public class EmpresaController {
 		return new ResponseEntity<Empresa>(empresa, HttpStatus.OK) ;
 	}
 	
+	/**
+	 * Metodo para crear una nueva empresa
+	 * @param empresa
+	 * @param result
+	 * @return
+	 */
 	@PostMapping("/empresas")
 	public ResponseEntity<?> create(@Valid @RequestBody Empresa empresa, BindingResult result) {
 
@@ -90,6 +104,13 @@ public class EmpresaController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
+	/**
+	 * Metodo para modificar una empresa pasandole ppor parametro la id
+	 * @param empresa
+	 * @param result
+	 * @param id
+	 * @return
+	 */
 	@PutMapping("/empresas/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Empresa empresa,BindingResult result, @PathVariable Long id) {
 		
@@ -132,6 +153,11 @@ public class EmpresaController {
 		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
 	}
 	
+	/**
+	 * Metodo para eliminar una empresa pasadole el id de la empresa
+	 * @param id
+	 * @return
+	 */
 	@DeleteMapping("/empresas/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		Map<String,Object> response = new HashMap<>();
