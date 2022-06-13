@@ -23,7 +23,7 @@ Los tutores de las empresa solo podran ver un listado de los alumnos de su propi
 
 ## Prototipo de la Interfaz del proyecto
 
-A conyinuación se ira detallando la evolución del prototipo según sus fases.
+A continuación se ira detallando la evolución del prototipo según sus fases.
 * Paguina Inicio
 ![image](https://user-images.githubusercontent.com/73124468/164982510-0030e7c6-29fb-4735-b56d-7c53617353ac.png)
 * Login
