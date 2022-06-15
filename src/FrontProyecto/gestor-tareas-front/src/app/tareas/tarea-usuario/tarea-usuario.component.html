@@ -1,6 +1,5 @@
 <div class="ui-g-12" style="width: 100%">
   <p-panel header="Administracion de Tareas" style="width: 100%">
-    <button type="button" pButton pRipple icon="pi pi-file-o" (click)="todoTable.exportCSV()" class="p-mr-2" pTooltip="Exportar CSV" tooltipPosition="bottom"></button>
 
     <p-table
       #todoTable
@@ -28,7 +27,7 @@
           <tr>
             <th>
               <p-columnFilter
-                type="text"
+                type="date"
                 field="registdate"
                 placeholder="Buscar por Fecha"
               ></p-columnFilter>
@@ -40,13 +39,8 @@
                 placeholder="Buscar por Horas"
               ></p-columnFilter>
             </th>
-            
-            <th>
-              <div class="p-d-flex p-jc-between p-ai-center">
-                Fecha
-                <p-columnFilter type="date" field="date" display="menu"></p-columnFilter>
-              </div>
-            </th>
+
+
             <th>
               <div class="col-12 md:col-4">
                 <div class="p-inputgroup">
@@ -58,6 +52,9 @@
                     " placeholder="Filtro General"/>
                 </div>
               </div>
+            </th>
+            <th>
+              <button type="button" pButton pRipple icon="pi pi-file-o" (click)="todoTable.exportCSV()" class="p-mr-2" pTooltip="Exportar CSV" tooltipPosition="bottom"></button>
             </th>
           </tr>
 
