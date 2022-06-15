@@ -44,7 +44,6 @@ import com.alixar.springboot.backend.apirest.service.Password;
 import com.alixar.springboot.backend.apirest.service.UserServiceImpl;
 
 
-@CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 public class UserController {
 

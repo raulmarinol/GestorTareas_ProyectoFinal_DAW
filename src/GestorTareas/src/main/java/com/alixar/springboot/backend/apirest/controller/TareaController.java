@@ -26,7 +26,7 @@ import com.alixar.springboot.backend.apirest.models.User;
 import com.alixar.springboot.backend.apirest.service.TareaServiceImpl;
 import com.alixar.springboot.backend.apirest.service.UserServiceImpl;
 
-@CrossOrigin(origins = {"http://localhost:4200"})
+
 @RestController
 public class TareaController {
 

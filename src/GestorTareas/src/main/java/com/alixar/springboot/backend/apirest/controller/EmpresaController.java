@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alixar.springboot.backend.apirest.models.Empresa;
 import com.alixar.springboot.backend.apirest.service.EmpresaServiceImpl;
 
-@CrossOrigin(origins = { "http://localhost:4200" })
+
 @RestController
 public class EmpresaController {
 	

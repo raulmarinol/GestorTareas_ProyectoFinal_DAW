@@ -18,7 +18,6 @@ import com.alixar.springboot.backend.apirest.repository.UserRepository;
 import com.alixar.springboot.backend.apirest.security.JWTUtil;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:4200"})
 public class LoginController {
 
 	@Autowired
